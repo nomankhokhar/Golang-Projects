@@ -54,3 +54,51 @@ Below are the Endpoint
 
 - Hello
 - weather
+
+## LoadBalancer in Golang
+
+This is a **Load Balancer** implementation written in Go that distributes incoming HTTP requests across multiple backend servers using a **round-robin algorithm**.
+
+### Features
+
+- **Round-Robin Load Balancing**: Distributes requests evenly across servers in a cyclic manner
+- **Reverse Proxy**: Uses Go's `net/http/httputil.ReverseProxy` to forward requests to backend servers
+- **Health Checking**: Built-in server availability checking (IsAlive method)
+- **Interface-Based Design**: Clean abstraction using Go interfaces for extensibility
+
+### How It Works
+
+1. **Startup**: Initializes 3 backend servers (Facebook, Bing, DuckDuckGo)
+2. **Listen**: Listens for HTTP requests on `http://localhost:8000`
+3. **Route**: Each incoming request is forwarded to the next available server in round-robin order
+4. **Proxy**: Uses reverse proxy to transparently forward requests and responses
+
+### Request Flow
+
+```
+Request 1 → Facebook
+Request 2 → Bing
+Request 3 → DuckDuckGo
+Request 4 → Facebook (cycles back)
+Request 5 → Bing
+...
+```
+
+### Run the Program
+
+```bash
+go run main.go
+```
+
+Then access: `http://localhost:8000`
+
+### Components
+
+- **Server Interface**: Defines behavior for backend servers (Address, IsAlive, Serve)
+- **simpleServer Struct**: Implements the Server interface with reverse proxy
+- **LoadBalancer Struct**: Manages multiple servers and distributes traffic using round-robin
+- **Round-Robin Algorithm**: Uses modulo operator to cycle through servers
+
+### Skill Level
+
+Intermediate - Covers interfaces, structs, methods, HTTP handling, and algorithm implementation.
