@@ -102,3 +102,32 @@ Then access: `http://localhost:8000`
 ### Skill Level
 
 Intermediate - Covers interfaces, structs, methods, HTTP handling, and algorithm implementation.
+
+## Build Todo-API using Gin
+
+A RESTful CRUD API for managing todo items, built with the **Gin** web framework and an in-memory store.
+
+### Endpoints
+
+| Method | Endpoint | Description |
+|--------|---------------------|--------------------------|
+| GET | `/api/v1/todos` | Get all todos |
+| GET | `/api/v1/todos/:id` | Get a todo by ID |
+| POST | `/api/v1/todos` | Create a new todo |
+| PUT | `/api/v1/todos/:id` | Update an existing todo |
+| DELETE | `/api/v1/todos/:id` | Delete a todo |
+
+### Run the Program
+
+```bash
+cd "Build Todo-API using Gin"
+go run main.go
+```
+
+Then access: `http://localhost:8080/api/v1/todos`
+
+### Project Structure
+
+- **models/** – `Todo` struct and `TodoStore` (in-memory CRUD operations with auto-incrementing IDs)
+- **controllers/** – Request handlers with JSON binding, validation, and error responses
+- **routes/** – Gin router setup with grouped `/api/v1` endpoints
